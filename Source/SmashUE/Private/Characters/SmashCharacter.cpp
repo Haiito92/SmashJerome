@@ -3,7 +3,7 @@
 
 #include "Characters/SmashCharacter.h"
 
-
+#pragma region Unreal Default
 // Sets default values
 ASmashCharacter::ASmashCharacter()
 {
@@ -22,6 +22,7 @@ void ASmashCharacter::BeginPlay()
 void ASmashCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	RotateMeshUsingOrient();
 }
 
 // Called to bind functionality to input
@@ -29,4 +30,24 @@ void ASmashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
+#pragma endregion 
 
+#pragma region Orient
+float ASmashCharacter::GetOrientX() const
+{
+	return OrientX;
+}
+
+void ASmashCharacter::SetOrientX(float NewOrientX)
+{
+	OrientX = NewOrientX;
+}
+
+void ASmashCharacter::RotateMeshUsingOrient() const
+{
+	FRotator Rotation = GetMesh()->GetRelativeRotation();
+	Rotation.Yaw = - 90.f * OrientX;
+	GetMesh()->SetRelativeRotation(Rotation);
+	
+}
+#pragma endregion 
