@@ -3,7 +3,9 @@
 
 #include "Characters/States/SmashCharacterStateWalk.h"
 
+#include "Characters/SmashCharacter.h"
 #include "Characters/SmashCharacterStateID.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 ESmashCharacterStateID USmashCharacterStateWalk::GetStateID()
 {
@@ -14,34 +16,38 @@ void USmashCharacterStateWalk::StateEnter(ESmashCharacterStateID PreviousState)
 {
 	Super::StateEnter(PreviousState);
 
-	GEngine->AddOnScreenDebugMessage(
-		-1,
-		3.f,
-		FColor::Cyan,
-		TEXT("Enter StateWalk")
-		);
+	Character->GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+	
+	// GEngine->AddOnScreenDebugMessage(
+	// 	-1,
+	// 	3.f,
+	// 	FColor::Cyan,
+	// 	TEXT("Enter StateWalk")
+	// 	);
 }
 
 void USmashCharacterStateWalk::StateExit(ESmashCharacterStateID NextState)
 {
 	Super::StateExit(NextState);
 
-	GEngine->AddOnScreenDebugMessage(
-		-1,
-		3.f,
-		FColor::Red,
-		TEXT("Exit StateWalk")
-		);
+	// GEngine->AddOnScreenDebugMessage(
+	// 	-1,
+	// 	3.f,
+	// 	FColor::Red,
+	// 	TEXT("Exit StateWalk")
+	// 	);
 }
 
 void USmashCharacterStateWalk::StateTick(float DeltaTime)
 {
 	Super::StateTick(DeltaTime);
 
-	GEngine->AddOnScreenDebugMessage(
-		-1,
-		3.f,
-		FColor::Green,
-		TEXT("Tick StateWalk")
-		);
+	Character->AddMovementInput(FVector::ForwardVector, Character->GetOrientX());
+	
+	// GEngine->AddOnScreenDebugMessage(
+	// 	-1,
+	// 	3.f,
+	// 	FColor::Green,
+	// 	TEXT("Tick StateWalk")
+	// 	);
 }
