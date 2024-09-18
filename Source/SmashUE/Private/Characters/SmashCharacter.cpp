@@ -3,6 +3,8 @@
 
 #include "Characters/SmashCharacter.h"
 
+#include "Characters/SmashCharacterStateMachine.h"
+
 #pragma region Unreal Default
 // Sets default values
 ASmashCharacter::ASmashCharacter()
@@ -15,7 +17,9 @@ ASmashCharacter::ASmashCharacter()
 void ASmashCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	CreateStateMachine();
+
+	InitStateMachine();
 }
 
 // Called every frame
@@ -50,4 +54,19 @@ void ASmashCharacter::RotateMeshUsingOrient() const
 	GetMesh()->SetRelativeRotation(Rotation);
 	
 }
+#pragma endregion 
+
+#pragma region State Machine
+
+void ASmashCharacter::CreateStateMachine()
+{
+	StateMachine = NewObject<USmashCharacterStateMachine>(this);
+}
+
+void ASmashCharacter::InitStateMachine()
+{
+	if(StateMachine == nullptr) return;
+	StateMachine->Init(this);
+}
+
 #pragma endregion 
