@@ -20,6 +20,9 @@ public:
 	virtual void StateExit(ESmashCharacterStateID NextState) override;
 
 	virtual void StateTick(float DeltaTime) override;
+	
+	UFUNCTION()
+	void OnInputMoveXFast(float InputMoveX);
 
 private:
 	UPROPERTY(EditAnywhere)
