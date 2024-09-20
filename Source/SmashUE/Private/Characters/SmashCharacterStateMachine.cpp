@@ -4,6 +4,7 @@
 #include "Characters/SmashCharacterStateMachine.h"
 
 #include "SmashCharacterState.h"
+#include "SmashCharacterStateAlias.h"
 #include "Characters/SmashCharacter.h"
 #include "Characters/SmashCharacterStateID.h"
 
@@ -12,7 +13,9 @@ void USmashCharacterStateMachine::Init(ASmashCharacter* InCharacter)
 	Character = InCharacter;
 	FindStates();
 	InitStates();
-
+	FindStateAliases();
+	InitStateAliases();
+	
 	ChangeState(ESmashCharacterStateID::Idle);
 }
 
@@ -20,6 +23,11 @@ void USmashCharacterStateMachine::Tick(float DeltaTime)
 {
 	if(CurrentState==nullptr)return;
 	CurrentState->StateTick(DeltaTime);
+
+	for(USmashCharacterStateAlias* StateAlias : AllStateAliases)
+	{
+		StateAlias->StateAliasTick(DeltaTime);
+	}
 }
 
 ASmashCharacter* USmashCharacterStateMachine::GetCharacter() const
@@ -61,6 +69,11 @@ USmashCharacterState* USmashCharacterStateMachine::GetState(ESmashCharacterState
 	return nullptr;
 }
 
+ESmashCharacterStateID USmashCharacterStateMachine::GetCurrentStateID()
+{
+	return CurrentStateID;
+}
+
 void USmashCharacterStateMachine::FindStates()
 {
 	TArray<UActorComponent*> FoundComponents = Character->K2_GetComponentsByClass(USmashCharacterState::StaticClass());
@@ -74,10 +87,32 @@ void USmashCharacterStateMachine::FindStates()
 	}
 }
 
+
 void USmashCharacterStateMachine::InitStates()
 {
 	for(USmashCharacterState* State : AllStates)
 	{
 		State->StateInit(this);
+	}
+}
+
+void USmashCharacterStateMachine::FindStateAliases()
+{
+	TArray<UActorComponent*> FoundComponents = Character->K2_GetComponentsByClass(USmashCharacterStateAlias::StaticClass());
+
+	for(UActorComponent* StateComponent : FoundComponents)
+	{
+		USmashCharacterStateAlias* StateAlias = Cast<USmashCharacterStateAlias>(StateComponent);
+		if(StateAlias == nullptr) continue;
+
+		AllStateAliases.Add(StateAlias);
+	}
+}
+
+void USmashCharacterStateMachine::InitStateAliases()
+{
+	for(USmashCharacterStateAlias* StateAlias : AllStateAliases)
+	{
+		StateAlias->StateAliasInit(this);
 	}
 }

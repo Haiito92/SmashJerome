@@ -44,6 +44,7 @@ void ASmashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	if(EnhancedInputComponent == nullptr) return;
 
 	BindInputMoveXAxisAndActions(EnhancedInputComponent);
+	BindInputJumpAndActions(EnhancedInputComponent);
 }
 #pragma endregion 
 
@@ -160,5 +161,33 @@ void ASmashCharacter::OnInputMoveXFast(const FInputActionValue& InputActionValue
 {
 	InputMoveX = InputActionValue.Get<float>();
 	InputMoveXFastEvent.Broadcast(InputMoveX);
+}
+
+#pragma endregion 
+
+#pragma region Input Jump
+void ASmashCharacter::BindInputJumpAndActions(UEnhancedInputComponent* EnhancedInputComponent)
+{
+	if(InputData==nullptr) return;
+
+	if(InputData->InputActionJump)
+	{
+		EnhancedInputComponent->BindAction(
+			InputData->InputActionJump,
+			ETriggerEvent::Started,
+			this,
+			&ASmashCharacter::OnInputJump);
+	}
+}
+
+void ASmashCharacter::OnInputJump(const FInputActionValue& InputActionValue)
+{
+	InputJumpEvent.Broadcast();
+	
+	GEngine->AddOnScreenDebugMessage(
+		-1,
+		3.f,
+		FColor::Orange,
+		TEXT("InputJump"));
 }
 #pragma endregion 

@@ -8,6 +8,7 @@
 
 enum class ESmashCharacterStateID : uint8;
 class USmashCharacterState;
+class USmashCharacterStateAlias;
 class ASmashCharacter;
 
 /**
@@ -29,13 +30,17 @@ public:
 	void ChangeState(ESmashCharacterStateID NextStateID);
 
 	USmashCharacterState* GetState(ESmashCharacterStateID StateID);
-	
+
+	ESmashCharacterStateID GetCurrentStateID();
 protected:
 	UPROPERTY()
 	TObjectPtr<ASmashCharacter> Character;
 
 	UPROPERTY()
 	TArray<USmashCharacterState*> AllStates;
+
+	UPROPERTY()
+	TArray<USmashCharacterStateAlias*> AllStateAliases;
 
 	UPROPERTY(BlueprintReadOnly)
 	ESmashCharacterStateID CurrentStateID;
@@ -46,4 +51,8 @@ protected:
 	void FindStates();
 
 	void InitStates();
+
+	void FindStateAliases();
+
+	void InitStateAliases();
 };
