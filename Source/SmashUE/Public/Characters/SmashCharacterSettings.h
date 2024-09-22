@@ -8,6 +8,8 @@
 
 class UInputMappingContext;
 class USmashCharacterInputData;
+enum class ESmashCharacterStateID : uint8;
+class USmashCharacterState;
 /**
  * 
  */
@@ -25,4 +27,7 @@ public:
 
 	UPROPERTY(Config, EditAnywhere, Category="Inputs")
 	float InputMoveXThreshold;
+
+	UPROPERTY(Config, EditAnywhere, Category="States")
+	TMap<ESmashCharacterStateID, TSubclassOf<USmashCharacterState>> DefaultStates;
 };

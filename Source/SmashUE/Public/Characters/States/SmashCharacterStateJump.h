@@ -27,4 +27,6 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float JumpDuration;
+
+	virtual void OnJumpEvent() override;
 };

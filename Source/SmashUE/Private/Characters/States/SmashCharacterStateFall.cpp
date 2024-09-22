@@ -40,3 +40,8 @@ void USmashCharacterStateFall::OnLanded(const FHitResult& Hit)
 {
 	StateMachine->ChangeState(ESmashCharacterStateID::Idle);
 }
+
+void USmashCharacterStateFall::CheckIfIsFalling()
+{
+	
+}

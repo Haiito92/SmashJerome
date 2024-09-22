@@ -6,6 +6,7 @@
 #include "UObject/Object.h"
 #include "SmashCharacterStateMachine.generated.h"
 
+class USmashCharacterSettings;
 enum class ESmashCharacterStateID : uint8;
 class USmashCharacterState;
 class USmashCharacterStateAlias;
@@ -37,10 +38,10 @@ protected:
 	TObjectPtr<ASmashCharacter> Character;
 
 	UPROPERTY()
-	TArray<USmashCharacterState*> AllStates;
-
+	const USmashCharacterSettings* CharacterSettings;
+	
 	UPROPERTY()
-	TArray<USmashCharacterStateAlias*> AllStateAliases;
+	TArray<USmashCharacterState*> AllStates;
 
 	UPROPERTY(BlueprintReadOnly)
 	ESmashCharacterStateID CurrentStateID;
@@ -51,8 +52,4 @@ protected:
 	void FindStates();
 
 	void InitStates();
-
-	void FindStateAliases();
-
-	void InitStateAliases();
 };

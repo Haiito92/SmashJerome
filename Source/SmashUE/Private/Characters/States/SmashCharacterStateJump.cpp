@@ -45,3 +45,8 @@ void USmashCharacterStateJump::StateTick(float DeltaTime)
 
 	
 }
+
+void USmashCharacterStateJump::OnJumpEvent()
+{
+	
+}

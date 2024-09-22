@@ -12,6 +12,7 @@ class SMASHUE_API USmashCharacterStateFall : public USmashCharacterState
 {
 	GENERATED_BODY()
 
+public:
 	virtual ESmashCharacterStateID GetStateID() override;
 
 	virtual void StateEnter(ESmashCharacterStateID PreviousState) override;
@@ -19,7 +20,10 @@ class SMASHUE_API USmashCharacterStateFall : public USmashCharacterState
 	virtual void StateExit(ESmashCharacterStateID NextState) override;
 
 	virtual void StateTick(float DeltaTime) override;
-	
+
+private:
 	UFUNCTION()
 	void OnLanded(const FHitResult& Hit);
+
+	virtual void CheckIfIsFalling() override;
 };

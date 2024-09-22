@@ -14,7 +14,7 @@ enum class ESmashCharacterStateID : uint8;
 
 
 UCLASS(Abstract)
-class SMASHUE_API USmashCharacterState : public UActorComponent
+class SMASHUE_API USmashCharacterState : public UObject
 {
 	GENERATED_BODY()
 
@@ -25,7 +25,7 @@ public:
 	virtual ESmashCharacterStateID GetStateID();
 
 	virtual void StateInit(USmashCharacterStateMachine* InStateMachine);
-
+	
 	virtual void StateEnter(ESmashCharacterStateID PreviousState);
 
 	virtual void StateExit(ESmashCharacterStateID NextState);
@@ -43,4 +43,10 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<UAnimMontage> StateAnimMontage;
+
+	UFUNCTION()
+	virtual void OnJumpEvent();
+
+	UFUNCTION()
+	virtual void CheckIfIsFalling();
 };

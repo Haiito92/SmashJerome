@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "SmashCharacter.generated.h"
 
+enum class ESmashCharacterStateID : uint8;
 class USmashCharacterInputData;
 class UInputMappingContext;
 class USmashCharacterStateMachine;
@@ -59,6 +60,9 @@ public:
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<USmashCharacterStateMachine> StateMachine;
+
+	UPROPERTY()
+	TMap<ESmashCharacterStateID, TSubclassOf<USmashCharacterStateMachine>> OverrideStates;
 #pragma endregion
 
 #pragma region Input Data / Mapping Context
