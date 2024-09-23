@@ -13,7 +13,7 @@ class USmashCharacterStateMachine;
 enum class ESmashCharacterStateID : uint8;
 
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable, BlueprintType)
 class SMASHUE_API USmashCharacterState : public UObject
 {
 	GENERATED_BODY()
