@@ -190,4 +190,27 @@ void ASmashCharacter::OnInputJump(const FInputActionValue& InputActionValue)
 		FColor::Orange,
 		TEXT("InputJump"));
 }
-#pragma endregion 
+
+#pragma endregion
+
+#pragma region Input Attack
+void ASmashCharacter::BindInputAttackAndActions(UEnhancedInputComponent* EnhancedInputComponent)
+{
+	if(InputData==nullptr) return;
+
+	if(InputData->InputActionAttack)
+	{
+		EnhancedInputComponent->BindAction(
+			InputData->InputActionAttack,
+			ETriggerEvent::Started,
+			this,
+			&ASmashCharacter::OnInputAttack
+			);
+	}
+}
+
+void ASmashCharacter::OnInputAttack(const FInputActionValue& InputActionValue)
+{
+	InputAttackEvent.Broadcast();
+}
+#pragma endregion;

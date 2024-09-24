@@ -41,14 +41,22 @@ void USmashCharacterState::StateInit(USmashCharacterStateMachine* InStateMachine
 
 void USmashCharacterState::StateEnter(ESmashCharacterStateID PreviousState)
 {
-	if(Character!=nullptr && StateAnimMontage != nullptr) Character->PlayAnimMontage(StateAnimMontage);
+	if(Character!=nullptr) return;
+	
+	if(StateAnimMontage != nullptr) Character->PlayAnimMontage(StateAnimMontage);
+	
 	Character->InputJumpEvent.AddDynamic(this, &USmashCharacterState::OnJumpEvent);
 
+	Character->InputAttackEvent.AddDynamic(this, &USmashCharacterState::OnAttackEvent);
 }
 
 void USmashCharacterState::StateExit(ESmashCharacterStateID NextState)
 {
+	if(Character!=nullptr) return;
+	
 	Character->InputJumpEvent.RemoveDynamic(this, &USmashCharacterState::OnJumpEvent);
+
+	Character->InputAttackEvent.RemoveDynamic(this, &USmashCharacterState::OnAttackEvent);
 }
 
 void USmashCharacterState::StateTick(float DeltaTime)
@@ -67,4 +75,9 @@ void USmashCharacterState::CheckIfIsFalling()
 	{
 		StateMachine->ChangeState(ESmashCharacterStateID::Fall);
 	}
+}
+
+void USmashCharacterState::OnAttackEvent()
+{
+	StateMachine->ChangeState(ESmashCharacterStateID::Attack);
 }

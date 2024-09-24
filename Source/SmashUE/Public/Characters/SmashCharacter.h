@@ -113,5 +113,17 @@ public:
 	void BindInputJumpAndActions(UEnhancedInputComponent* EnhancedInputComponent);
 	
 	void OnInputJump(const FInputActionValue& InputActionValue);
+#pragma endregion
+
+#pragma region Input Attack
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FInputAttackEvent);
+	
+public:
+	UPROPERTY()
+	FInputAttackEvent InputAttackEvent;
+
+	void BindInputAttackAndActions(UEnhancedInputComponent* EnhancedInputComponent);
+
+	void OnInputAttack(const FInputActionValue& InputActionValue);
 #pragma endregion 
 };

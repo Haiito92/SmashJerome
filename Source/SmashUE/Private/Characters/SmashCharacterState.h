@@ -49,4 +49,7 @@ protected:
 
 	UFUNCTION()
 	virtual void CheckIfIsFalling();
+
+	UFUNCTION()
+	virtual void OnAttackEvent();
 };
