@@ -31,17 +31,17 @@ void USmashCharacterState::StateInit(USmashCharacterStateMachine* InStateMachine
 	CharacterSettings = GetDefault<USmashCharacterSettings>();	
 
 	
-	GEngine->AddOnScreenDebugMessage(
-		-1,
-		3.f,
-		FColor::Magenta,
-		FString::Printf(TEXT("Init State %d"), GetStateID())
-		);
+	// GEngine->AddOnScreenDebugMessage(
+	// 	-1,
+	// 	3.f,
+	// 	FColor::Magenta,
+	// 	FString::Printf(TEXT("Init State %d"), GetStateID())
+	// 	);
 }
 
 void USmashCharacterState::StateEnter(ESmashCharacterStateID PreviousState)
 {
-	if(Character!=nullptr) return;
+	if(Character==nullptr) return;
 	
 	if(StateAnimMontage != nullptr) Character->PlayAnimMontage(StateAnimMontage);
 	

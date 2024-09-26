@@ -24,9 +24,17 @@ public:
 	virtual void StateTick(float DeltaTime) override;
 
 private:
+	UPROPERTY()
+	FTimerHandle AnimationLengthTimerHandle;
+
+	UFUNCTION()
+	void OnAnimationLengthTimerElapsed() const;
+	
+#pragma region Overriden Functions
 	virtual void OnJumpEvent() override;
 
 	virtual void CheckIfIsFalling() override;
 	
 	virtual void OnAttackEvent() override;
+#pragma endregion 
 };

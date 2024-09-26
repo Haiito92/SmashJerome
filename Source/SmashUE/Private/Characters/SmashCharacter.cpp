@@ -45,6 +45,7 @@ void ASmashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 	BindInputMoveXAxisAndActions(EnhancedInputComponent);
 	BindInputJumpAndActions(EnhancedInputComponent);
+	BindInputAttackAndActions(EnhancedInputComponent);
 }
 #pragma endregion 
 
