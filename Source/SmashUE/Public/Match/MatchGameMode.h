@@ -35,4 +35,7 @@ private:
 	void SpawnCharacters(const TArray<AArenaPlayerStart*>& SpawnPoints);
 	
 	TSubclassOf<ASmashCharacter> GetSmashCharacterClassFromInputType(EAutoReceiveInput::Type InputType) const;
+
+private:
+	void CreateAndInitPlayers() const;
 };

@@ -10,6 +10,8 @@ public class SmashUE : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "UMG", "DeveloperSettings" });
 		
+		PrivateDependencyModuleNames.AddRange(new string[] { "LocalMultiplayer" });
+		
 		// Uncomment if you are using Slate UI
 		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		
