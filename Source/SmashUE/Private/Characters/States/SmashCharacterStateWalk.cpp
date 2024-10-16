@@ -34,7 +34,7 @@ void USmashCharacterStateWalk::StateExit(ESmashCharacterStateID NextState)
 {
 	Super::StateExit(NextState);
 
-	Character->InputMoveXFastEvent.AddDynamic(this, &USmashCharacterStateWalk::OnInputMoveXFast);
+	Character->InputMoveXFastEvent.RemoveDynamic(this, &USmashCharacterStateWalk::OnInputMoveXFast);
 
 	// GEngine->AddOnScreenDebugMessage(
 	// 	-1,

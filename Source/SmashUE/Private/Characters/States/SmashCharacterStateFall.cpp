@@ -29,6 +29,9 @@ void USmashCharacterStateFall::StateEnter(ESmashCharacterStateID PreviousState)
 void USmashCharacterStateFall::StateExit(ESmashCharacterStateID NextState)
 {
 	Super::StateExit(NextState);
+
+	Character->LandedDelegate.RemoveDynamic(this, &USmashCharacterStateFall::OnLanded);
+
 }
 
 void USmashCharacterStateFall::StateTick(float DeltaTime)

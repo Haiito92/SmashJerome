@@ -57,7 +57,9 @@ void ULocalMultiplayerSubsystem::AssignKeyboardMapping(int PlayerIndex, int Keyb
 	
 	UEnhancedInputLocalPlayerSubsystem * InputSubsystem = GetGameInstance()->GetLocalPlayerByIndex(PlayerIndex)->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
 
-	InputSubsystem->AddMappingContext(LocalMultiplayerSettings->KeyboardProfilesData[KeyboardProfileIndex].GetIMCFromType(MappingType),0);
+	FModifyContextOptions ModifyContextOptions;
+	ModifyContextOptions.bForceImmediately = true;
+	InputSubsystem->AddMappingContext(LocalMultiplayerSettings->KeyboardProfilesData[KeyboardProfileIndex].GetIMCFromType(MappingType),0, ModifyContextOptions);
 }
 
 int ULocalMultiplayerSubsystem::GetAssignedPlayerIndexFromGamepadDeviceID(int DeviceID)
@@ -83,5 +85,7 @@ void ULocalMultiplayerSubsystem::AssignGamepadInputMapping(int PlayerIndex,
 	
 	UEnhancedInputLocalPlayerSubsystem * InputSubsystem = GetGameInstance()->GetLocalPlayerByIndex(PlayerIndex)->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
 
-	InputSubsystem->AddMappingContext(LocalMultiplayerSettings->GamepadProfileData.GetIMCFromType(MappingType),0);
+	FModifyContextOptions ModifyContextOptions;
+	ModifyContextOptions.bForceImmediately = true;
+	InputSubsystem->AddMappingContext(LocalMultiplayerSettings->GamepadProfileData.GetIMCFromType(MappingType),0, ModifyContextOptions);
 }

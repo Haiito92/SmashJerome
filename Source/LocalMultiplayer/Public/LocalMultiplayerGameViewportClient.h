@@ -19,6 +19,6 @@ public:
 
 	virtual bool InputKey(const FInputKeyEventArgs& EventArgs) override;
 
-	virtual bool InputAxis(FViewport* InViewport, int32 ControllerId, FKey Key, float Delta, float DeltaTime,
+	virtual bool InputAxis(FViewport* InViewport, FInputDeviceId InputDevice, FKey Key, float Delta, float DeltaTime,
 		int32 NumSamples, bool bGamepad) override;
 };

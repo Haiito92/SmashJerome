@@ -52,7 +52,7 @@ void USmashCharacterState::StateEnter(ESmashCharacterStateID PreviousState)
 
 void USmashCharacterState::StateExit(ESmashCharacterStateID NextState)
 {
-	if(Character!=nullptr) return;
+	if(Character==nullptr) return;
 	
 	Character->InputJumpEvent.RemoveDynamic(this, &USmashCharacterState::OnJumpEvent);
 
